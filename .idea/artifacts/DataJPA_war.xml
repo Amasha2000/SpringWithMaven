@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="DataJPA:war">
+    <output-path>$PROJECT_DIR$/DataJPA/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>DataJPA</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="DataJPA-1.0.0.war">
+      <element id="artifact" artifact-name="DataJPA:war exploded" />
+    </root>
+  </artifact>
+</component>
