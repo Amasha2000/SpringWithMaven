@@ -132,14 +132,15 @@
                     alert("Successfully Customer Registered");
                     loadAllCustomers();
                     clearForm();
-                } else {
-
-                }
+                 }// else {
+                //     alert(res.message);
+                // }
             },
-            error: function (ob, textStatus, error) {
-                console.log(ob);
-                console.log(textStatus);
-                console.log(error);
+            error: function (ob) {
+                alert(ob.responseJSON.message);
+                // console.log(ob);
+                // console.log(textStatus);
+                // console.log(error);
             }
         });
     }
@@ -161,7 +162,8 @@
                 clearForm();
             },
             error: function (ob, state) {
-                console.log(ob, state)
+               // console.log(ob, state)
+                alert(ob.responseJSON.message);
             }
         });
 
@@ -194,7 +196,8 @@
                 // }
             },
             error: function (ob, errorStus) {
-                console.log(ob); // other errors
+               // console.log(ob); // other errors
+                alert(ob.responseJSON.message);
             }
         });
     }
@@ -222,9 +225,10 @@
 
             },
             error: function (ob, status, t) {
-                console.log(ob);
-                console.log(status);
-                console.log(t);
+                // console.log(ob);
+                // console.log(status);
+                // console.log(t);
+                alert(ob.responseJSON.message);
             }
         });
     }
@@ -243,9 +247,12 @@
                     $("#cusName").val(customer.name);
                     $("#cusAddress").val(customer.address);
                     $("#cusSalary").val(customer.salary);
-                }else{
-                    clearForm();
-                }
+                // }else{
+                //     clearForm();
+                 }
+            },
+            error:function (ob){
+                alert(ob.responseJSON.message);
             }
         });
     }

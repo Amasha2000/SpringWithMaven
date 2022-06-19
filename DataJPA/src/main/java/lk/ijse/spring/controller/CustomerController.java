@@ -1,14 +1,13 @@
 package lk.ijse.spring.controller;
 
 import lk.ijse.spring.dto.CustomerDTO;
-import lk.ijse.spring.entity.Customer;
 import lk.ijse.spring.service.CustomerService;
 import lk.ijse.spring.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/customer")
@@ -23,6 +22,7 @@ public class CustomerController {
         return new ResponseUtil(200,"Ok",customerService.getAllCustomers());
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseUtil saveCustomer(@ModelAttribute CustomerDTO customer) {
         customerService.saveCustomer(customer);
