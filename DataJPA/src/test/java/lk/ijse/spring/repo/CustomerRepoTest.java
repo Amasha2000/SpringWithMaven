@@ -1,21 +1,17 @@
 package lk.ijse.spring.repo;
 
 import lk.ijse.spring.config.JPAConfig;
-import lk.ijse.spring.config.WebAppConfig;
-import lk.ijse.spring.dto.CustomerDTO;
 import lk.ijse.spring.entity.Customer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import javax.transaction.Transactional;
-
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 
 @WebAppConfiguration
@@ -28,9 +24,10 @@ class CustomerRepoTest {
 
     @Test
     public void saveCustomer(){
-        Customer customer = new Customer("C001", "Kamal", "Galle", 49349358);
-        Customer customer1 = new Customer("C002", "Kamal", "Galle", 49349358);
-        customerRepo.save(customer);
+//        Customer customer = new Customer("C001", "Kamal", "Galle", 49349358);
+//        Customer customer1 = new Customer("C002", "Kamal", "Galle", 49349358);
+        Customer customer1 = new Customer("C003", "Nimal", "Galle", 49349358);
+//        customerRepo.save(customer);
         customerRepo.save(customer1);
     }
 
@@ -84,7 +81,7 @@ class CustomerRepoTest {
 
     @Test
     public void countByName(){
-        int kamal = customerRepo.countByName("Kamal");
+        long kamal = customerRepo.countByName("Kamal");
         System.out.println(kamal);
     }
 
@@ -94,6 +91,57 @@ class CustomerRepoTest {
         for (Customer customer : kamal) {
             System.out.println(customer);
         }
+    }
+
+    @Test
+    public void getAllCustomers(){
+        List<Customer> allCustomers = customerRepo.getAllCustomers();
+        for (Customer allCustomer : allCustomers) {
+            System.out.println(allCustomer);
+        }
+    }
+
+    @Test
+    public void getAllCustomersWithJPQL(){
+        List<Customer> allCustomersJPQL = customerRepo.getAllCustomersJPQL();
+        for (Customer customer : allCustomersJPQL) {
+            System.out.println(customer);
+        }
+    }
+
+    @Test
+    public void getAllCustomersHQL(){
+        List<Customer> allCustomersWithHQL = customerRepo.getAllCustomersWithHQL();
+        for (Customer customer : allCustomersWithHQL) {
+            System.out.println(customer);
+        }
+    }
+
+    @Test
+    public void searchCustomerFromNamePositionalParams(){
+        Customer nimal = customerRepo.searchCustomerByName("Nimal");
+        System.out.println(nimal);
+    }
+
+    @Test
+    public void searchCustomerNamedParams(){
+        Customer customer = customerRepo.searchCustomerNamedParams("Nimal", "Galle");
+        System.out.println(customer);
+    }
+
+    @Test
+    public void getAllCustomersWithJPQLPositionalParams(){
+        Customer nimal = customerRepo.getAllCustomersJPQLPositionalParams("Nimal");
+        System.out.println(nimal);
+    }
+
+    @Test
+    public void checkPageableFeatures(){
+        PageRequest pr=PageRequest.of(0,3);
+        Page<Customer> all = customerRepo.findAll(pr);
+        all.forEach(v->{
+            System.out.println(v.toString());
+        });
     }
 
 //    @Test
